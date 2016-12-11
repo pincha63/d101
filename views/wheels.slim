@@ -1,0 +1,8 @@
+h1 Wheels for project #{@project.projectname}
+a href="/projects/#{@project.id}/wheel/new" Create a new wheel for this project
+- if @wheels.any?
+  ul#wheels
+    -@wheels.each do |w|
+      li <a href="/wheels/#{w.id}">#{w.wname}</a>
+- else
+  p No wheels have been created yet!

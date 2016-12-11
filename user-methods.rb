@@ -15,7 +15,6 @@ helpers UserHelpers
 
 get '/users' do #show list of users
   users_find
-  tags_find
   slim :users
 end
 

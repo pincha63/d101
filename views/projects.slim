@@ -1,0 +1,8 @@
+h1 Projects
+a href="/projects/new" Create a new project
+- if @projects.any?
+  ul#projects
+    -@projects.each do |proj|
+      li <a href="/projects/#{proj.id}">#{proj.projectname}</a>
+- else
+  p No projects have been created yet!

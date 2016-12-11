@@ -1,0 +1,8 @@
+h1 Fields
+a href="/dayfields/new" Create a new field
+- if @dayfields.any?
+  ul#dayfields
+    -@dayfields.each do |df|
+      li <a href="/dayfields/#{df.id}">#{df.fieldname}</a> - range: #{df.minrange}-#{df.maxrange} 
+- else
+  p No fields have been created yet!

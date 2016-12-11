@@ -1,5 +1,11 @@
-Technical debt as of 05-Dec
+Technical debt as of 11-Dec
 
-1. Helpers clean... approach of having my_methods seems dirty
-2. Rationalize CSS... too many rules, not enough structure
-3. The class taglist is used both for div and ul
+1. Need a general sanity utility to enforce rel.int.
+2. Javascript... with or without the ruby racer
+3. If Javascript then Ajax for the tags drag-and-drop
+4. Dates to propagate from Project down to wheels to definition of days
+5. Data Entry to use sliders?
+6. Reports
+7. JRuby?
+
+Otrosi... sera posible crear un entorno en Unix con rubyracer?

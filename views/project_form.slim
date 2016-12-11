@@ -1,0 +1,9 @@
+label for="projectname" Project Name:
+input#projectname type="text" name="project[projectname]" value="#{@project.projectname}"
+ul#myusersweep
+    -User.each do |userref|
+        li id: #{userref.id}:  #{userref.username}
+label for=":user.id" Choose user ID:
+input#user_id type="number" name="project[user_id]" value="#{@project.user_id}" 
+p
+  input type="submit" value="Save Project"

@@ -1,0 +1,8 @@
+h1 Show
+- myW = Wheel.get(@myId)
+- myF = Dayfield.get(@myField)
+p Tried to delete for Wheel #{@myId} : #{myW.wname} and field #{@myField} : #{myF.fieldname}
+-Fieldinwheel.each do |fw|
+   -if (fw.wheel_id == myW.id) && (fw.dayfield_id == myF.id)
+	   -fw.destroy
+-redirect to("/wheels/#{@myId}")	   

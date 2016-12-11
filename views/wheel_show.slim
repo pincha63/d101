@@ -1,0 +1,28 @@
+h1 Wheel name is #{@wheel.wname}
+p  Wheel ID: #{@wheel.id.to_s}
+p Wheel Name: #{@wheel.wname}
+p Project ID: #{@wheel.project_id.to_s}
+p Duration: #{@wheel.wlength}
+p Place in project: #{@wheel.place_in_project}
+
+#main.nofloat
+	.taglist
+      ul
+	    -@wheel.dayfields.sort_by{|x| x.fieldname}.each do |aField|
+          -@arg1 = aField.id
+		  -@arg2 = @wheel.id
+          li.tagel <a href="/unassign/#{@arg2}/#{@arg1}">#{aField.fieldname}</a>
+      -noCollection=[]
+	  -Dayfield.each do |noField|
+         -noCollection.push(noField) unless @wheel.dayfields.include?(noField)		
+      ul
+		-noCollection.uniq.sort_by{|x| x.fieldname}.each do |aField|
+          -@arg1 = aField.id
+		  -@arg2 = @wheel.id
+		  -@arg3 = @wheel.dayfields.count + 1
+		  li.tagel.notselected <a href="/assign/#{@arg2}/#{@arg1}/#{@arg3}">#{aField.fieldname}</a>
+#footer.nofloat
+    p.smalltext $&nbsp;
+
+	
+	

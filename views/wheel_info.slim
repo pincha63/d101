@@ -1,0 +1,16 @@
+-parentProj = Project.get(@wheel.project_id)
+h1 Wheel name is #{@wheel.wname}
+p  Wheel ID: #{@wheel.id.to_s}
+p  Wheel Name: <a href="/wheels/#{@wheel.id}">#{@wheel.wname}</a>
+p  Parent Project ID: #{@wheel.project_id.to_s} - #{parentProj.projectname}
+p  Duration: #{@wheel.wlength}
+p  Place in project: #{@wheel.place_in_project}
+ul
+  -@wheel.dayfields.each do |f|
+     -myField = Dayfield.get(f.id).fieldname
+	 li <a href="/dayfields/#{f.id}">#{myField}</a>
+ul
+  -@wheel.days.each do |d|
+     -myDay = Day.get(d.id).place_in_wheel
+	 li #{myDay}
+	 

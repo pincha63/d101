@@ -1,0 +1,4 @@
+h1 Edit Field
+form method="POST" action="/dayfields/#{@dayfield.id}"
+  input type="hidden" name="_method" value="PUT"
+  == slim :dayfield_form

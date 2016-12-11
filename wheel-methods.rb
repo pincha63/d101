@@ -18,25 +18,14 @@ get '/wheels' do #show list of wheels
   slim :wheels
 end
 
-get '/wheels/new' do
-  @wheel = Wheel.new
-  slim :wheel_new
-end
-
-post '/wheels' do
-  wheel_create
-  redirect to("/wheels/#{@wheel.id}")
-end
-
-get '/wheels/:id' do
+get '/wheels/:id' do #show individual wheel
   @wheel = wheel_find
   slim :wheel_show
 end
 
-put '/wheels/:id' do
-  wheel = wheel_find
-  wheel.update(params[:wheel])
-  redirect to("/wheels/#{wheel.id}")
+get '/wheels/info/:id' do #show individual wheel
+  @wheel = wheel_find
+  slim :wheel_info
 end
 
 delete '/wheels/:id' do
@@ -46,7 +35,23 @@ delete '/wheels/:id' do
   redirect to('/wheels')
 end
 
-get '/wheels/:id/edit' do
-  @wheel = wheel_find
-  slim :wheel_edit
+get '/assign/:wheel/:field/:pos' do
+    @myId = params[:wheel]
+    @myField = params[:field]
+    @myPos = params[:pos]
+    Fieldinwheel.create(place_in_wheel: @myPos, wheel_id: @myId, dayfield_id: @myField)
+    @wheel = Wheel.get(@myId)
+	redirect to("/wheels/#{@myId}")
+end
+
+get '/unassign/:wheel/:field' do
+    @myId = params[:wheel]
+    @myField = params[:field]
+    Fieldinwheel.each do |fw|
+	  if (fw.wheel_id == @myId) && (fw.dayfield_id == @myField)
+		fw.destroy
+	  end
+	end
+    slim :wrong
+#	redirect to("/wheels/#{@myId}")
 end

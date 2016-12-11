@@ -1,0 +1,23 @@
+h1 Show project #{@project.projectname}
+#leftside.floatleft
+    p Project Name: #{@project.projectname}
+	-parent = User.get(@project.user_id)
+	-parentid = parent.id
+	-parentname = parent.username
+	p Belongs to User: #{parentid} : #{parentname}
+    p <a href="/projects">back to projects index</a>
+	
+	ul
+	-@project.wheels.each do |w|
+	  li <a href="/wheels/#{w.id}">#{w.wname}</a>
+	p <a href="/projects/#{@project.id}/wheel/new">Create a new wheel for this project</a>
+	p <a href="/projects/#{@project.id}/wheels">manage wheels for this project</a>
+    p <a href="/projects/#{@project.id}/edit">edit this project</a>
+    form action="/projects/#{@project.id}" method="POST"
+      input type="hidden" name="_method" value="DELETE"
+      input type="submit" value="delete this project"
+	
+	
+
+	
+  

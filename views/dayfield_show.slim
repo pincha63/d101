@@ -1,0 +1,14 @@
+h1= @dayfield.id.to_s + ": " + @dayfield.fieldname
+#leftside.floatleft
+    p Range: #{@dayfield.minrange} :: #{@dayfield.maxrange}
+#rightside.floatright
+    -wheelCollection = []
+	-@dayfield.wheels.each do |w|
+	   -wheelCollection.push(w)
+#rightside.floatright
+    - if wheelCollection == []
+	    p No wheels have this field.
+	-else	
+        p Wheels using  this field:
+        -wheelCollection.each do |myW|
+	       p <a href="/wheels/#{myW.id}">#{myW.wname}</a>

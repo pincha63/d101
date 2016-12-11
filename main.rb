@@ -1,10 +1,30 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-#require 'sinatra/flash'
 require 'slim'
 require 'sass'
-require './classes'
-require './my_methods'
+#require 'sinatra/flash'
+#require './classes'
+#require './my_methods'
+
+require 'dm-core'
+require 'dm-migrations'
+
+configure :development do
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/d101.db")  
+end
+configure :production do
+  DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
+
+#data-related files to include
+require './class-definitions'
+require './user-methods'
+require './project-methods'
+require './wheel-methods'
+require './field-methods'
+require './day-methods'
+
+DataMapper.finalize
 
 helpers do
   def css(*stylesheets)
@@ -22,7 +42,6 @@ helpers do
   def set_title
     @title ||= "Your score today"
   end
-  
 end
 
 before do
@@ -45,7 +64,11 @@ get '/env' do
   slim :env
 end
 
+get '/info' do
+  @title = "Info on Wheels"
+  slim :info
+end
+
 not_found do #404
   slim :not_found
  end
- 

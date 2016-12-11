@@ -12,6 +12,7 @@ class Project
    include DataMapper::Resource
    property    :id, Serial
    property    :projectname, String
+   # startdate
    belongs_to  :user
    has n,      :wheels
 end
@@ -22,6 +23,7 @@ class Wheel
    property    :wname, String
    property    :wlength, Integer
    property    :place_in_project, Integer
+   # calculate startdate and enddate
    belongs_to  :project
    has n,      :days
    has n,      :fieldinwheels
@@ -52,6 +54,7 @@ class Day
    property    :projectref, String
    property    :place_in_wheel, Integer
    property    :actualdate, Date
+   # to be calculated from parent wheel dates
    belongs_to  :wheel
    has n,      :dayfieldvalues
 end

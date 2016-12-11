@@ -26,13 +26,14 @@ helpers do
 	end
 	userList.length > 3 ? userList.chop.chop : "No user... yet"
   end  
+end
 
-  def allDaysInProject(myProject)
+def allDaysInProject(myProject)
 	myProject.wheels.sort_by{|w| w.place_in_project}.each do |myWheel|
-	  puts myWheel.place_in_project.to_s + " : " + myWheel.wname
+	  #puts myWheel.place_in_project.to_s + " : " + myWheel.wname
       myWheel.days.sort_by{|d| d.place_in_wheel}.each do |myDay|     
-	    puts myDay.place_in_wheel.to_s + " : " + myWheel.wname
+	    puts "Date: " + myDay.actualdate.strftime('%a %d %b %Y') + " : wheel name is: " + myWheel.wname + " : place in wheel is " + myDay.place_in_wheel.to_s
 	  end
     end 
+  "Done"
   end  
-end

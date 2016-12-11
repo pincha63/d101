@@ -1,51 +1,52 @@
-module DayHelpers
-  def days_find
-    @days = Day.all
+module DayfieldHelpers
+  def dayfields_find
+    @dayfields = Dayfield.all
   end
 
-  def day_find
-    Day.get(params[:id]) 
+  def dayfield_find
+    Dayfield.get(params[:id]) 
   end
   
-  def day_create
-    @day = Day.create(params[:day])
+  def dayfield_create
+    @dayfield = Dayfield.create(params[:dayfield])
   end
 end
-helpers DayHelpers
+helpers DayfieldHelpers
 
-get '/days' do #show list of days
-  days_find
-  slim :days
+get '/dayfields' do #show list of dayfields
+  dayfields_find
+  slim :dayfields
 end
 
-get '/days/new' do
-  @day = Day.new
-  slim :day_new
+get '/dayfields/new' do
+  @dayfield = Dayfield.new
+  slim :dayfield_new
 end
 
-post '/days' do
-  day_create
-  redirect to("/days/#{@day.id}")
+post '/dayfields' do
+  dayfield_create
+  redirect to("/dayfields/#{@dayfield.id}")
 end
 
-get '/days/:id' do
-  @day = day_find
-  slim :day_show
+get '/dayfields/:id' do
+  @dayfield = dayfield_find
+  slim :dayfield_show
 end
 
-put '/days/:id' do
-  day = day_find
-  day.update(params[:day])
-  redirect to("/days/#{day.id}")
+put '/dayfields/:id' do
+  dayfield = dayfield_find
+  dayfield.update(params[:dayfield])
+  redirect to("/dayfields/#{dayfield.id}")
 end
 
-delete '/days/:id' do
-  day_find.fieldvalues.destroy
-  day_find.destroy
-  redirect to('/days')
+delete '/dayfields/:id' do
+  dayfield_find.fieldvalues.destroy
+  dayfield_find.fieldinwheels.destroy
+  dayfield_find.destroy
+  redirect to('/dayfields')
 end
 
-get '/days/:id/edit' do
-  @day = day_find
-  slim :day_edit
+get '/dayfields/:id/edit' do
+  @dayfield = dayfield_find
+  slim :dayfield_edit
 end
