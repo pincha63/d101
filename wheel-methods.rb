@@ -23,6 +23,9 @@ get '/wheels/:id' do #show individual wheel
   slim :wheel_show
 end
 
+
+
+
 get '/wheels/info/:id' do #show individual wheel
   @wheel = wheel_find
   slim :wheel_info
@@ -36,6 +39,8 @@ delete '/wheels/:id' do
 end
 
 get '/assign/:wheel/:field/:pos' do
+#note that the calculation of :pos in wheel_show is incorrect... 
+#because it will assign the same place_in_wheel to all fields
     @myId = params[:wheel]
     @myField = params[:field]
     @myPos = params[:pos]
@@ -47,11 +52,36 @@ end
 get '/unassign/:wheel/:field' do
     @myId = params[:wheel]
     @myField = params[:field]
-    Fieldinwheel.each do |fw|
-	  if (fw.wheel_id == @myId) && (fw.dayfield_id == @myField)
-		fw.destroy
-	  end
-	end
+#    Fieldinwheel.each do |fw|
+#	  if (fw.wheel_id == @myId) && (fw.dayfield_id == @myField)
+#		fw.destroy
+#	  end
+#	end
+    slim :wrong
+#	redirect to("/wheels/#{@myId}")
+end
+
+#post method to do required changes to db and then redirect BYPASSING layout if not xhr... see book
+
+post '/ajaxassign/:wheel/:field/:pos' do
+#note that the calculation of :pos in wheel_show is incorrect... 
+#because it will assign the same place_in_wheel to all fields
+    @myId = params[:wheel]
+    @myField = params[:field]
+    @myPos = params[:pos]
+    Fieldinwheel.create(place_in_wheel: @myPos, wheel_id: @myId, dayfield_id: @myField)
+    @wheel = Wheel.get(@myId)
+	redirect to("/wheels/#{@myId}")
+end
+
+post '/ajaxunassign/:wheel/:field' do
+    @myId = params[:wheel]
+    @myField = params[:field]
+#    Fieldinwheel.each do |fw|
+#	  if (fw.wheel_id == @myId) && (fw.dayfield_id == @myField)
+#		fw.destroy
+#	  end
+#	end
     slim :wrong
 #	redirect to("/wheels/#{@myId}")
 end

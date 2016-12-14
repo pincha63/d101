@@ -1,0 +1,190 @@
+<HTML><head><title>HTML Reference</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style>
+body {
+  /* background: url("file:///C:/Users/aplatkin/Documents/bjback.jpg");  */
+  font-family: Helvetica, Arial, sans-serif; }
+
+h1 {
+  color: #903;
+  font: 32px/1 Helvetica, Arial, sans-serif; }
+
+h2 {
+  color: #85002c;
+  font: 24px/1 Helvetica, Arial, sans-serif; }
+
+
+.taglist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; }
+.taglist li {
+  float: left; }
+.taglist li.rite {
+  float: right;
+  padding-left: 29px;
+  padding-right: 6px; }
+.taglist a {
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+  background: #ffffff;
+  color: #223232; }
+  .taglist a:hover {
+    background: #cccccc; }
+.taglist li.tagel {
+  font-size: 10px;
+  background: #e0e0e0;
+  border: 1px solid #3b3b3b;
+  border-radius: 4px;
+  min-height: 16px;
+  margin: 11px 4px 18px 4px;
+  padding: 4px; }
+.taglist li.notselected {
+  color: #416060;
+  background: #fafafa; }
+
+nav {
+  font-weight: bold; }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #444;
+    overflow: hidden; }
+  nav li {
+    float: left; }
+  nav li.rite {
+    float: right;
+    padding-left: 29px;
+    padding-right: 6px; }
+  nav a {
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    background: #444;
+    color: #fff; }
+    nav a:hover {
+      background: #111111; }
+  nav li.tagel {
+    font-size: 10px;
+    background: #252525;
+    border: 1px solid black;
+    border-radius: 4px;
+    min-height: 16px;
+    margin: 11px 4px 18px 4px;
+    padding: 4px; }
+  nav li.notselected {
+    color: white;
+    background: #3f3f3f; }
+
+nav a.current {
+  background: #6a6a6a; }
+
+.floatleft {
+  /* background: #eeeedd; */
+  float: left;
+  width: 30.4%; }
+
+.floatright {
+  float: right;
+  width: 66.3%; }
+
+.nofloat {
+  clear: both;
+  padding: 0.77%;
+  min-height: 39px; }
+
+p {
+  font: 13px/1.4 Helvetica, Arial, sans-serif; }
+
+.smalltext {
+  font-size: 55%; }
+
+label {
+  display: block; }
+
+ul.over {
+  padding-bottom: 55px;
+  background: url('http://www.cufonfonts.com/makeImage.php?width=650&id=1026&size=35&d=y&text=Drop%20Here') center bottom no-repeat #ccc;
+}
+ul.over li {
+  background: #fff;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav><ul>
+<li>Songs</li>
+<li>Tags</li>
+<li class="rite">About</li>
+</ul></nav>
+
+<section>
+<div class="floatleft" id="leftside">
+<h2>13: Maahi Ve</h2>
+<p>Artist: SRK etc.</p>
+<p>Length: 6 min 10 sec</p>
+<pre>That&#39;s the way...</pre>
+</div>
+
+<div class="floatright" id="rightside">
+<p><br />
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1BWdglekty0" frameborder="0" allowfullscreen></iframe>
+
+<div class="taglist">
+<ul>
+<li id="item101" class="tagel" draggable="true">Bollywood</li>
+<li id="item102" class="tagel" draggable="true">India</li>
+</ul>
+To select a tag, <b>drag it</b> to the upper row of tags
+<ul>
+<li id="item103" class="tagel notselected" draggable="true">Africa</li>
+<li id="item104" class="tagel notselected" draggable="true">Argentina</li>
+<li id="item105" class="tagel notselected" draggable="true">Cumbia</li>
+<li id="item106" class="tagel notselected" draggable="true">Argentina folklore</li>
+<li id="item110" class="tagel notselected" draggable="true">Tango</li>
+<li id="item111" class="tagel notselected" draggable="true">Venezuela</li>
+<li id="item112" class="tagel notselected" draggable="true">Zulia</li>
+</ul>
+</div>
+</div>
+<div class="nofloat" id="footer"><p class="smalltext">$&nbsp;</p></div>
+</section>
+
+<script>
+
+$(document).ready(function(){
+  $('li').bind('dragstart', function(event) {
+    event.originalEvent.dataTransfer.setData("text/plain",  event.target.getAttribute('id'));
+  });
+
+  $('ul').bind('dragover', function(event) {     event.preventDefault();
+  });
+
+  $('ul').bind('dragenter', function(event) {
+    $(this).addClass("over");
+  });
+
+  $('ul').bind('dragleave drop', function(event) {
+    $(this).removeClass("over");
+  });
+
+  $('li').bind('drop', function(event) {
+    return false;
+  });
+
+  $('ul').bind('drop', function(event) {
+    var listitem = event.originalEvent.dataTransfer.getData("text/plain");
+    event.target.appendChild(document.getElementById(listitem));
+    event.preventDefault();
+  });
+});
+</script>
+</body></html>
